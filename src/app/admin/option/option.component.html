@@ -1,0 +1,102 @@
+<div class="div-opt-page">
+  <div class="border-title">
+    <div class="container">
+      <h2>{{ isPost ? "Gestion des articles" : "Gestion des pages" }}</h2>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="options">
+      <a routerLink="/adminafg/addpage" class="add-btn" *ngIf="!isPost"
+        >Ajouter</a
+      >
+      <a *ngIf="isPost" routerLink="/adminafg/addpost" class="add-btn"
+        >Ajouter</a
+      >
+      <div>
+        <form>
+          <input (click)="selectAll()" id="select-all" type="checkbox" />
+          <label for="select-all">Tout sélectionner</label>
+        </form>
+        <form>
+          <select (change)="allActions($event)">
+            <option value="all">Actions groupées</option>
+            <option value="supprimer">Supprimer</option>
+            <option value="desactiver">Désactiver</option>
+            <option value="activer">Activer</option>
+          </select>
+        </form>
+      </div>
+    </div>
+    <div class="all-items" *ngIf="!isPost">
+      <div class="item-line" *ngFor="let item of pages">
+        <div>
+          <input
+            type="checkbox"
+            id="{{ item.id }}-{{ item.type }}"
+            class="all-inputs"
+            (click)="selectOne($event)"
+            [checked]="allSelect"
+          />
+          <label for="{{ item.id }}-{{ item.type }}">{{
+            item.name.toUpperCase()
+          }}</label>
+        </div>
+        <div>
+          <button
+            [disabled]="item.route == 'accueil' || item.route == 'contact'"
+            (click)="activatePage(item.id)"
+            class="desactiv-btn"
+          >
+            {{ item.active === "1" ? "Dépublier" : "Publier" }}
+          </button>
+          <button (click)="editPage(item.id)" class="modif-btn">
+            Modifier
+          </button>
+
+          <button
+            [disabled]="item.route == 'accueil' || item.route == 'contact'"
+            (click)="deletePage(item.id)"
+            class="delete-btn"
+          >
+            Supprimer
+          </button>
+          <a class="view-page" routerLink="/{{ item.route }}" target="_blank"
+            ><i class="far fa-eye"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+    <div class="all-items" *ngIf="isPost">
+      <div class="item-line" *ngFor="let item of posts">
+        <div>
+          <input
+            type="checkbox"
+            id="{{ item.id }}-posts"
+            class="all-inputs"
+            (click)="selectOne($event)"
+            [checked]="allSelect"
+          />
+          <label for="{{ item.id }}-posts">{{
+            item.title.toUpperCase()
+          }}</label>
+        </div>
+        <div>
+          <button (click)="activatePost(item.id)" class="desactiv-btn">
+            {{ item.active == "1" ? "Dépublier" : "Publier" }}
+          </button>
+          <button (click)="editPost(item.id)" class="modif-btn">
+            Modifier
+          </button>
+
+          <button (click)="deletePost(item.id)" class="delete-btn">
+            Supprimer
+          </button>
+          <a class="view-page" routerLink="/post/{{ item.id }}" target="_blank"
+            ><i class="far fa-eye"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

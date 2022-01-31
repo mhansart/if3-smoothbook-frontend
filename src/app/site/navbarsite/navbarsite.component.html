@@ -1,0 +1,28 @@
+<header class="header-site" (window:resize)="onResize($event)">
+  <div class="header-site-container container">
+    <div class="logo"><img [src]="urlImg + '/' + logo" /></div>
+    <div (click)="closeMenu()" class="menu-burger-site">
+      <div class="burger-line line1"></div>
+      <div class="burger-line line2"></div>
+      <div class="burger-line line3"></div>
+    </div>
+    <nav class="nav-site" [ngClass]="menuClosed ? 'menu-closed-site' : ''">
+      <ul>
+        <li *ngFor="let page of pages">
+          <a
+            routerLink="/accueil"
+            routerLinkActive="active"
+            *ngIf="page.route === 'accueil'"
+            >{{ page.name }}</a
+          >
+          <a
+            [ngClass]="{ active: page.route === isActive }"
+            *ngIf="page.route !== 'accueil'"
+            (click)="navigateTo(page.route, $event)"
+            >{{ page.name }}</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

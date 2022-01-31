@@ -1,0 +1,14 @@
+<div class="overlay">
+  <div class="close" (click)="closeModal()"><i class="fas fa-times"></i></div>
+  <div [class]="array[id].orientation" class="modal-container">
+    <div *ngFor="let img of array; let i = index" class="img-modal">
+      <img *ngIf="i == id" id="img-modal" [src]="urlImg + '/' + img.picture" />
+    </div>
+  </div>
+  <div (click)="toLeft()" class="to-left">
+    <i class="fas fa-angle-left"></i>
+  </div>
+  <div (click)="toRight()" class="to-right">
+    <i class="fas fa-angle-right"></i>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+@use '../../variables' as *;
+.connexion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  form {
+    .mdp-oubli {
+      margin-top: 15px;
+      color: $secondary-color;
+    }
+    h3 {
+      font-size: 20px;
+      padding-bottom: 15px;
+      color: $white;
+    }
+    padding: 30px 80px;
+    background-color: $primary-color;
+    display: flex;
+    flex-direction: column;
+    .input-container {
+      position: relative;
+      input {
+        margin-bottom: 20px;
+        padding: 7px 15px;
+        border: none;
+        &:focus {
+          outline: none;
+          & + span {
+            width: 100%;
+          }
+          &::placeholder {
+            color: white;
+          }
+        }
+      }
+      span {
+        background-color: $secondary-color;
+        height: 2px;
+        width: 0;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        transition: width 0.2s;
+      }
+    }
+
+    button {
+      padding: 7px 15px;
+      border: none;
+      background-color: $secondary-color;
+      color: $white;
+      &[disabled] {
+        background-color: darken($neutral, 20%);
+      }
+    }
+  }
+}
+.error-msg {
+  color: $danger;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}

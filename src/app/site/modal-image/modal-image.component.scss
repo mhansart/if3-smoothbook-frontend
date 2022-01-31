@@ -1,0 +1,119 @@
+@use '../../../variables' as *;
+
+.overlay {
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  background-color: rgba($color: black, $alpha: 0.8);
+  z-index: 3000;
+  .close {
+    position: absolute;
+    right: 60px;
+    top: 30px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    color: rgb(102, 102, 102);
+    font-size: 40px;
+    text-shadow: none;
+    &:hover {
+      opacity: 1;
+    }
+    @media (max-width: 600px) {
+      text-shadow: 1px 1px 5px rgb(175, 175, 175);
+      right: 30px;
+      font-size: 30px;
+      opacity: 1;
+      color: black;
+    }
+  }
+  .to-left,
+  .to-right {
+    position: absolute;
+    top: 50%;
+    color: rgb(102, 102, 102);
+    cursor: pointer;
+    transition: opacity 0.3s;
+    transform: translateY(-50%);
+    opacity: 0.5;
+    i {
+      font-size: 60px;
+    }
+    &:hover {
+      opacity: 1;
+    }
+    &.to-right {
+      right: 60px;
+      @media (max-width: 600px) {
+        opacity: 1;
+        text-shadow: 1px 1px 5px rgb(175, 175, 175);
+        right: 30px;
+        color: black;
+        i {
+          font-size: 30px;
+        }
+      }
+    }
+    &.to-left {
+      left: 60px;
+      @media (max-width: 600px) {
+        left: 30px;
+        opacity: 1;
+        text-shadow: 1px 1px 5px rgb(175, 175, 175);
+        color: black;
+        i {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+  .modal-container {
+    font-weight: 600;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-top: 4px solid var(--secondary-color-site);
+    position: relative;
+    transition: width 0.5s, height 0.5s;
+    display: inline-flex;
+    &.horizontal {
+      width: 600px;
+      height: auto;
+      #img-modal {
+        width: 100%;
+        height: auto;
+        img {
+          height: auto;
+          width: 100%;
+        }
+      }
+      @media (max-width: 768px) {
+        width: 95%;
+      }
+    }
+    &.vertical {
+      height: 600px;
+      width: auto;
+      display: inline-flex;
+      .img-modal {
+        height: 100%;
+        width: auto;
+        #img-modal {
+          height: 100%;
+          width: auto;
+        }
+      }
+      @media (max-width: 450px) {
+        width: 95%;
+        height: auto;
+        .img-modal {
+          #img-modal {
+            height: auto;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

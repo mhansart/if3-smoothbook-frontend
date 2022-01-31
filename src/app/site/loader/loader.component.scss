@@ -1,0 +1,88 @@
+@use '../../../variables' as *;
+
+@keyframes load {
+  0% {
+    transform: scale(1.07);
+  }
+  20% {
+    transform: scale(1.13);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(1.13);
+  }
+  80% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.loader {
+  width: 100%;
+  position: fixed;
+  background-color: $white;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+
+  .loader-admin {
+    display: flex;
+    width: 45px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    > div {
+      width: 20px;
+      height: 19px;
+      border-radius: 100%;
+      margin-bottom: 5px;
+      &.blue-dot {
+        background-color: $primary-color;
+      }
+      &.yellow-dot {
+        background-color: $secondary-color;
+      }
+      &.dot-one {
+        animation: load 1s infinite;
+      }
+      &.dot-two {
+        animation: load 1s infinite;
+        animation-delay: 0.25s;
+      }
+      &.dot-three {
+        animation: load 1s infinite;
+        animation-delay: 0.5s;
+      }
+      &.dot-four {
+        animation: load 1s infinite;
+        animation-delay: 0.75s;
+      }
+    }
+  }
+  .loader-site {
+    width: 45px;
+    display: flex;
+    justify-content: space-between;
+    > div {
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color-site);
+      border-radius: 100%;
+      &.dot-one {
+        animation: load 1s infinite;
+      }
+      &.dot-two {
+        animation: load 1s infinite;
+        animation-delay: 0.33s;
+      }
+      &.dot-three {
+        animation: load 1s infinite;
+        animation-delay: 0.66s;
+      }
+    }
+  }
+}

@@ -1,0 +1,142 @@
+<div class="dashboard">
+  <div class="border-title">
+    <div class="container"><h2>Accueil</h2></div>
+  </div>
+  <div class="container">
+    <div class="hello">
+      <p>
+        Bonjour <b>{{ firstname }} {{ name }}</b> !
+      </p>
+    </div>
+    <div class="bloc-two">
+      <div class="link-fast">
+        <div>
+          <a routerLink="" target="_blank">
+            <i class="far fa-eye"></i>Aperçu du site</a
+          >
+        </div>
+
+        <div>
+          <a routerLink="/adminafg/addpage" routerLinkActive="active"
+            ><i class="far fa-file-alt"></i>Ajouter une page</a
+          >
+        </div>
+        <div>
+          <a routerLink="/adminafg/addpost" routerLinkActive="active"
+            ><i class="fas fa-thumbtack"></i>Ajouter un article</a
+          >
+        </div>
+        <div>
+          <a routerLink="/adminafg/user-profile" routerLinkActive="active">
+            <i class="fas fa-user"></i>Mon compte</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="bloc-one d-flex">
+      <h5>Vue du mois</h5>
+      <div class="month">
+        <i
+          *ngIf="
+            !(
+              actualMonth == this.views[0]?.month &&
+              actualYear == this.views[0]?.year
+            )
+          "
+          (click)="changeMonth('left')"
+          class="fas fa-angle-left"
+        ></i
+        ><span>{{ monthStr }} {{ year }}</span
+        ><i
+          *ngIf="!(month == actualMonth && year == actualYear)"
+          (click)="changeMonth('right')"
+          class="fas fa-angle-right"
+        ></i>
+      </div>
+      <div class="graphique-general d-flex">
+        <div class="one-day-bar" *ngFor="let date of dateMonth">
+          <div
+            class="bar"
+            [ngClass]="date.day == 6 || date.day == 5 ? 'weekend-bar' : ''"
+            [ngStyle]="{ 'height.px': 150 }"
+          >
+            <div
+              class="color-bar"
+              [ngStyle]="{
+                'height.px': date?.views ? (date.views / mostVisited) * 150 : 0
+              }"
+            >
+              <div
+                class="stat-hidden"
+                [ngClass]="date.str > 15 ? 'left-stat' : 'right-stat'"
+              >
+                <p>
+                  {{ date.str }}
+                  {{
+                    monthStr.length > 4
+                      ? monthStr.substring(0, 3) + "."
+                      : monthStr
+                  }}
+                </p>
+                <p>
+                  <b
+                    >{{ date?.views }}
+                    {{ date?.views <= 1 ? "vue" : "vues" }}</b
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+          <p class="date-nbr">{{ date.str }}</p>
+        </div>
+        <div class="indicator" [ngStyle]="{ 'height.px': 100 }">
+          <span>{{ mostVisited }}</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between other-stats">
+        <div>
+          <p class="title-stat">Vue sur le mois</p>
+          <p>{{ monthViews }}</p>
+        </div>
+        <div>
+          <p class="title-stat">Toutes les vues</p>
+          <p>{{ allViews }}</p>
+        </div>
+        <div>
+          <p class="title-stat">Jour le plus prisé</p>
+          <p>{{ mostDay.join(", ") }}</p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between other-stats">
+        <div>
+          <p class="title-stat">Page la plus vue</p>
+          <ul>
+            <li *ngFor="let page of mostVisitedPage">
+              <a
+                target="_blank"
+                [routerLink]="'/' + page.route"
+                routerLinkActive="router-link-active"
+                >{{ page.name }}
+                <span>{{ page?.views[0]?.views }} vues</span></a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <p class="title-stat">Article le plus vu</p>
+          <ul>
+            <li *ngFor="let post of mostVisitedPost">
+              <a
+                target="_blank"
+                [routerLink]="'/post/' + post.id"
+                routerLinkActive="router-link-active"
+                >{{ post.title }}
+                <span>{{ post?.views[0]?.views }} vues</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

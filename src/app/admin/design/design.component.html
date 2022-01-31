@@ -1,0 +1,107 @@
+<div class="design-site">
+  <div class="border-title">
+    <div class="container"><h2>Apparence</h2></div>
+  </div>
+  <div class="container">
+    <form
+      enctype="multipart/form-data"
+      [formGroup]="fg"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="color-choice">
+        <h3>Choix du thème</h3>
+        <div class="d-flex" style="flex-wrap: wrap">
+          <div class="one-theme" *ngFor="let color of theme; let i = index">
+            <div>
+              <input
+                type="radio"
+                id="{{ color.color_theme }}"
+                value="{{ color.color_theme }}"
+                formControlName="color"
+              />
+              <label for="{{ color.color_theme }}">Thème n°{{ i + 1 }}</label>
+            </div>
+            <div style="display: flex">
+              <div
+                class="colors-theme"
+                [ngStyle]="{ 'background-color': color.primary_color }"
+              ></div>
+              <div
+                class="colors-theme"
+                [ngStyle]="{ 'background-color': color.secondary_color }"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="name-choice">
+        <h3>Nom du site</h3>
+        <input
+          type="text"
+          formControlName="sitename"
+          value="{{ siteName[0]?.infos_value }}"
+        />
+      </div>
+      <div class="logo-choice">
+        <h3>Choix du logo</h3>
+        <p class="warning">Uniquement les extensions .jpg, .png</p>
+        <input
+          (change)="onSelectFile($event, 'logo')"
+          type="file"
+          formControlName="logo"
+          accept=".jpg,.png"
+        />
+        <div class="image-upload">
+          <img [src]="srcLogo" />
+        </div>
+      </div>
+      <div class="favicon-choice">
+        <h3>Choix du favicon</h3>
+        <p class="warning">Uniquement les extensions .ico</p>
+        <input
+          (change)="onSelectFile($event, 'favicon')"
+          type="file"
+          formControlName="favicon"
+          accept=".ico"
+        />
+        <div class="image-upload">
+          <img [src]="src" />
+        </div>
+      </div>
+      <div class="font-choice">
+        <h3>Choix de la typo</h3>
+        <div
+          class="d-flex"
+          style="flex-wrap: wrap; justify-content: space-between"
+        >
+          <div class="one-typo" *ngFor="let font of fonts; let i = index">
+            <div>
+              <input
+                type="radio"
+                id="{{ font.font_theme }}"
+                value="{{ font.font_theme }}"
+                formControlName="font"
+              />
+              <label for="{{ font.font_theme }}"
+                >Typographies n°{{ i + 1 }}</label
+              >
+            </div>
+            <div style="display: flex; flex-grow: 1">
+              <div class="one-font">
+                <h2 [ngStyle]="{ 'font-family': font.title_font }">
+                  Lorem Ipsum
+                </h2>
+                <p [ngStyle]="{ 'font-family': font.content_font }">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
+                  orci ante, egestas a mi a, viverra facilisis nibh.
+                  Pellentesque dictum tincidunt dolor ut eleifend.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit">Valider</button>
+    </form>
+  </div>
+</div>

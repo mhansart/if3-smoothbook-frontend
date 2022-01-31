@@ -1,0 +1,22 @@
+@use '../../../variables' as *;
+footer {
+  height: 35px;
+  background-color: var(--primary-color-site);
+  color: $white;
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  img {
+    height: 20px;
+    width: auto;
+    margin-left: 5px;
+    margin-top: 3px;
+    fill: $white;
+  }
+  p {
+    margin: 0;
+  }
+}

@@ -1,0 +1,17 @@
+@use '../../../variables' as *;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-title-site);
+}
+p,
+a,
+button,
+div,
+span {
+  font-family: var(--font-content-site);
+}

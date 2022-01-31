@@ -1,0 +1,31 @@
+<div class="post">
+  <div
+    class="main-picture"
+    [ngStyle]="{
+      height: h + 'px'
+    }"
+  >
+    <img [src]="imgUrl" [alt]="post[0]?.title" />
+    <div class="title-project">
+      <h2>{{ post[0]?.title }}</h2>
+      <p>{{ content?.place }}-{{ content?.year }}</p>
+      <button (click)="scrollToElement(gallery)">Galerie photo</button>
+    </div>
+  </div>
+  <div class="description-project">
+    <div
+      class="text-content container"
+      [innerHTML]="content?.description | sanitizeHtml"
+    ></div>
+  </div>
+  <div #gallery class="container gallery">
+    <div class="masonry">
+      <div
+        class="one-picture"
+        *ngFor="let picture of content?.pictures; let i = index"
+      >
+        <img (click)="openModal(i)" [src]="urlImg + '/' + picture.picture" />
+      </div>
+    </div>
+  </div>
+</div>

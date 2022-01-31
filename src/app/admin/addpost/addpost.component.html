@@ -1,0 +1,110 @@
+<div class="add-post">
+  <div class="border-title">
+    <div class="container">
+      <h2>{{ updatePost ? "Modifier" : "Ajouter" }} un article</h2>
+    </div>
+  </div>
+  <div class="container">
+    <form
+      enctype="multipart/form-data"
+      [formGroup]="fg"
+      (ngSubmit)="onSubmit()"
+    >
+      <div>
+        <label for="title-post">Titre du projet</label>
+        <input type="text" id="title-post" formControlName="title" />
+      </div>
+      <div>
+        <label for="place">Localisation du projet</label>
+        <input type="text" id="place" formControlName="place" />
+      </div>
+      <div>
+        <label for="year">Année du projet</label>
+        <input type="number" id="year" formControlName="year" />
+      </div>
+      <div>
+        <label for="characteristics">Caractéristiques du projet</label>
+        <ckeditor
+          id="characteristics"
+          formControlName="characteristics"
+          [config]="{
+            toolbar: [
+              'heading',
+              '|',
+              'fontsize',
+              'alignment',
+              '|',
+              'bold',
+              'italic',
+              '|',
+              'link',
+              '|',
+              'outdent',
+              'indent',
+              '|',
+              'bulletedList',
+              'numberedList',
+              '|',
+              'blockQuote',
+              '|',
+              'undo',
+              'redo'
+            ]
+          }"
+          [editor]="Editor"
+        ></ckeditor>
+      </div>
+      <div>
+        <label for="main-image">Image d'entête</label>
+        <div class="main-image">
+          <input
+            id="main-image"
+            type="file"
+            formControlName="picture"
+            (change)="onSelectFile($event, 'main')"
+          />
+          <div class="image-upload">
+            <img [src]="mainImgUrl" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="images">Galerie d'image</label>
+        <div class="images">
+          <input
+            id="images"
+            type="file"
+            formControlName="pictures"
+            (change)="onSelectFile($event, 'all')"
+            multiple="multiple"
+          />
+          <div class="image-upload">
+            <div *ngFor="let url of multipleImgUrl; let i = index">
+              <div (click)="deleteImg(i)" class="delete-btn">
+                <i class="far fa-trash-alt"></i>
+              </div>
+              <img class="multiple-img" [src]="url.url" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>Ajouter cet article à la page / aux pages :</p>
+        <div *ngFor="let page of pages">
+          <input
+            (click)="selectOne($event)"
+            type="checkbox"
+            id="{{ page.id }}-{{ page.name }}"
+            [checked]="checkbox.includes(page.id)"
+          />
+          <label for="{{ page.id }}-{{ page.name }}">{{ page.name }}</label>
+        </div>
+      </div>
+      <div class="btn-validate">
+        <button type="submit" [disabled]="fg.invalid && !updatePost">
+          Valider
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

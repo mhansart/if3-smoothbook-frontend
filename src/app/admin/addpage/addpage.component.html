@@ -1,0 +1,178 @@
+<div class="add-page">
+  <div class="border-title">
+    <div class="container">
+      <h2>{{ updatePage ? "Modifier la page" : "Ajouter une page" }}</h2>
+    </div>
+  </div>
+  <div class="container">
+    <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="title-page"
+          ><b style="font-size: 18px">Titre</b> (ce que vous verrez dans le menu
+          du site)</label
+        >
+        <input type="text" id="title-page" formControlName="name" />
+      </div>
+      <div>
+        <label for="route-page"
+          ><b style="font-size: 18px">Url de la page</b>
+          {{
+            updatePage &&
+            (updatedPage[0]?.route == "contact" ||
+              updatedPage[0]?.route == "accueil")
+              ? " (vous ne pouvez pas modifier les pages de bases) "
+              : ""
+          }}</label
+        >
+        <input
+          type="text"
+          id="route-page"
+          [readonly]="
+            updatePage &&
+            (updatedPage[0]?.route == 'contact' ||
+              updatedPage[0]?.route == 'accueil')
+          "
+          formControlName="route"
+        />
+      </div>
+      <div>
+        <p style="font-size: 18px"><b>Type de page</b></p>
+        <div>
+          <input
+            type="radio"
+            id="page-page"
+            value="page"
+            formControlName="type"
+          />
+          <label for="page-page">Page</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="portfolio-page"
+            value="portfolio"
+            formControlName="type"
+          />
+
+          <label for="portfolio-page">Portfolio</label>
+        </div>
+      </div>
+      <div
+        formArrayName="content"
+        class="form-array-content"
+        *ngIf="fg.value['type'] == 'page'"
+      >
+        <div style="margin-bottom: 0; font-size: 18px"><b>Contenu</b></div>
+        <div
+          *ngFor="let contentControl of getcontent().controls; let i = index"
+        >
+          <form enctype="multipart/form-data" [formGroupName]="i">
+            <h4 class="d-flex justify-content-between">
+              <div class="d-flex">
+                <div
+                  class="bg-bloc"
+                  [ngClass]="
+                    fg.value['content'][i].type == 'bloc-text'
+                      ? 'bloc-text-color'
+                      : ''
+                  "
+                >
+                  <img
+                    [src]="'assets/' + fg.value['content'][i].type + '.svg'"
+                    [alt]="fg.value['content'][i].type"
+                  />
+                </div>
+                <span>Bloc n° {{ i + 1 }}</span>
+              </div>
+              <div (click)="deleteBlock(i)" class="delete-btn">
+                <i class="far fa-trash-alt"></i>
+              </div>
+            </h4>
+            <div
+              class="add-image"
+              *ngIf="
+                fg.value['content'][i].type == 'image' ||
+                fg.value['content'][i].type == 'image-text'
+              "
+            >
+              <input
+                type="file"
+                formControlName="image"
+                (change)="onSelectFile($event, i)"
+              />
+              <div class="image-upload">
+                <img [src]="allUrl[i] ? allUrl[i] : ''" />
+              </div>
+            </div>
+
+            <ckeditor
+              formControlName="text"
+              *ngIf="fg.value['content'][i].type !== 'image'"
+              [config]="{
+                toolbar: [
+                  'heading',
+                  '|',
+                  'fontsize',
+                  'alignment',
+                  '|',
+                  'bold',
+                  'italic',
+                  '|',
+                  'link',
+                  '|',
+                  'outdent',
+                  'indent',
+                  '|',
+                  'bulletedList',
+                  'numberedList',
+                  '|',
+                  'blockQuote',
+                  '|',
+                  'undo',
+                  'redo'
+                ]
+              }"
+              [editor]="Editor"
+            ></ckeditor>
+            <div
+              class="add-image"
+              *ngIf="fg.value['content'][i].type == 'text-image'"
+            >
+              <input
+                type="file"
+                formControlName="image"
+                (change)="onSelectFile($event, i)"
+              />
+              <div class="image-upload">
+                <img [src]="allUrl[i] ? allUrl[i] : ''" />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div style="padding-bottom: 0">
+          <p>Ajouter un bloc</p>
+          <div class="d-flex btn-content">
+            <div (click)="addcontent('text')">
+              <img src="assets/text.svg" alt="bloc texte" />
+            </div>
+            <div (click)="addcontent('image-text')">
+              <img src="assets/image-text.svg" alt="bloc image/texte" />
+            </div>
+            <div (click)="addcontent('text-image')">
+              <img src="assets/text-image.svg" alt="bloc text/image" />
+            </div>
+            <div (click)="addcontent('image')">
+              <img src="assets/image.svg" alt="bloc image" />
+            </div>
+            <div (click)="addcontent('bloc-text')" class="btn-bloc">
+              <img src="assets/bloc-text.svg" alt="bloc texte fond coloré" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button-sub">
+        <button type="submit" [disabled]="fg.invalid">Valider</button>
+      </div>
+    </form>
+  </div>
+</div>

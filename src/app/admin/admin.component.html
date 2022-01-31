@@ -1,0 +1,17 @@
+<nb-layout style="width: 100%">
+  <nb-layout-column style="background-color: white; padding: 0">
+    <app-modal *ngIf="modalIsOpen"></app-modal>
+
+    <app-navbar></app-navbar>
+
+    <div (click)="closeMenu()" class="menu-burger">
+      <div class="burger-line line1"></div>
+      <div class="burger-line line2"></div>
+      <div class="burger-line line3"></div>
+    </div>
+    <main id="main-admin">
+      <app-loader-admin></app-loader-admin>
+      <router-outlet></router-outlet>
+    </main>
+  </nb-layout-column>
+</nb-layout>

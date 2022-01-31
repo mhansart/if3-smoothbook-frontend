@@ -1,0 +1,76 @@
+<header
+  [ngClass]="menuClosed ? 'menu-closed' : ''"
+  [ngStyle]="{ 'height.px': h }"
+  class="header-admin"
+  (window:resize)="onResize($event)"
+>
+  <div class="header-admin-container">
+    <div class="logo"><img src="assets/logo.svg" /></div>
+    <nav>
+      <ul>
+        <li class="li-link overview">
+          <a routerLink="" target="_blank">
+            <i class="far fa-eye"></i>Aperçu du site</a
+          >
+        </li>
+        <li class="li-link">
+          <a routerLink="dashboard" routerLinkActive="active">
+            <i class="fas fa-home"></i>Accueil</a
+          >
+        </li>
+        <li>
+          <div class="plus-menu" (click)="pageMasked = !pageMasked">
+            <span><i class="far fa-file-alt"></i>Pages</span
+            ><i *ngIf="pageMasked" class="fas fa-plus"></i
+            ><i *ngIf="!pageMasked" class="fas fa-minus"></i>
+          </div>
+          <div class="pages-opt" *ngIf="!pageMasked" [@slideDownUp]>
+            <a routerLink="addpage" routerLinkActive="active"
+              ><i class="fas fa-long-arrow-alt-right"></i>Ajouter une page</a
+            >
+            <a routerLink="optionpages" routerLinkActive="active"
+              ><i class="fas fa-long-arrow-alt-right"></i>Gérer les pages</a
+            >
+          </div>
+        </li>
+        <li>
+          <div class="plus-menu" (click)="postMasked = !postMasked">
+            <span><i class="fas fa-thumbtack"></i>Articles</span
+            ><i *ngIf="postMasked" class="fas fa-plus"></i
+            ><i *ngIf="!postMasked" class="fas fa-minus"></i>
+          </div>
+          <div class="posts-opt" *ngIf="!postMasked" [@slideDownUp]>
+            <a routerLink="addpost" routerLinkActive="active"
+              ><i class="fas fa-long-arrow-alt-right"></i>Ajouter un article</a
+            >
+            <a routerLink="optionpost" routerLinkActive="active"
+              ><i class="fas fa-long-arrow-alt-right"></i>Gérer les articles</a
+            >
+          </div>
+        </li>
+        <li class="li-link">
+          <a routerLink="designsite" routerLinkActive="active">
+            <i class="fas fa-paint-brush"></i>Apparence</a
+          >
+        </li>
+        <li class="li-link">
+          <a routerLink="user-profile" routerLinkActive="active">
+            <i class="fas fa-user"></i>Mon compte</a
+          >
+        </li>
+        <li class="menu-end">
+          <i
+            (click)="closeMenu()"
+            *ngIf="!menuClosed"
+            class="fas fa-long-arrow-alt-left"
+          ></i
+          ><i
+            (click)="closeMenu()"
+            *ngIf="menuClosed"
+            class="fas fa-long-arrow-alt-right"
+          ></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

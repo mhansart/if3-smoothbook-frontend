@@ -1,0 +1,80 @@
+@use '../../../variables' as *;
+
+@keyframes load {
+  0% {
+    transform: scale(1.07);
+  }
+  20% {
+    transform: scale(1.13);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(1.13);
+  }
+  80% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.loader {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   position: fixed;
+  //   background-color: $white;
+  //   z-index: 1000;
+  //   width: 100%;
+  position: fixed;
+  background-color: $white;
+  width: 100%;
+  margin-left: -250px;
+  padding-left: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+  z-index: 99;
+  @media (max-width: 992px) {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .loader-admin {
+    display: flex;
+    width: 45px;
+    height: 45px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    > div {
+      width: 20px;
+      height: 19px;
+      border-radius: 100%;
+      margin-bottom: 5px;
+      &.blue-dot {
+        background-color: $primary-color;
+      }
+      &.yellow-dot {
+        background-color: $secondary-color;
+      }
+      &.dot-one {
+        animation: load 1s infinite;
+      }
+      &.dot-two {
+        animation: load 1s infinite;
+        animation-delay: 0.25s;
+      }
+      &.dot-three {
+        animation: load 1s infinite;
+        animation-delay: 0.5s;
+      }
+      &.dot-four {
+        animation: load 1s infinite;
+        animation-delay: 0.75s;
+      }
+    }
+  }
+}

@@ -1,0 +1,279 @@
+@use '../../../variables' as *;
+
+.user-page {
+  padding-bottom: 15px;
+  .border-title {
+    border-bottom: 2px solid $secondary-color;
+  }
+  h2 {
+    padding: 30px 0px;
+    margin-bottom: 0;
+    display: flex;
+    flex-grow: 1;
+  }
+  h3 {
+    font-size: 24px;
+    padding-top: 30px;
+  }
+
+  .container {
+    padding: 0 60px;
+    @media (max-width: 992px) {
+      max-width: 100%;
+      width: 100%;
+      padding: 0 15px;
+    }
+    .btn-deconnexion {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .btn-logout {
+        display: block;
+        margin: 30px 0;
+        padding: 7px 15px;
+        background-color: $danger;
+        color: $white;
+        border: none;
+        i {
+          display: none;
+        }
+        @media (max-width: 992px) {
+          i {
+            display: flex;
+          }
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+    > div {
+      border-bottom: 1px solid $neutral;
+      padding-bottom: 30px;
+      &:last-child {
+        border-bottom: 0;
+      }
+      .one-admin {
+        align-items: center;
+        @media (max-width: 1037.98px) {
+          flex-direction: column;
+          button {
+            margin-top: 15px;
+          }
+          p {
+            flex-direction: column;
+            .tiret {
+              display: none;
+            }
+          }
+        }
+        p {
+          margin: 0;
+          display: flex;
+          align-items: center;
+        }
+      }
+      .delete-btn {
+        display: block;
+        cursor: pointer;
+        background-color: $danger;
+        padding: 7px 15px;
+        margin-top: 0;
+        color: $white;
+      }
+      .modif-mdp {
+        background-color: transparent;
+        color: $danger;
+        text-decoration: underline;
+        padding-right: 0;
+        font-size: 12px;
+      }
+      .form-infos {
+        button {
+          display: block;
+        }
+        &.updateInfos {
+          input {
+            border: 1px solid $neutral;
+            &:focus {
+              border-color: $secondary-color;
+            }
+          }
+        }
+        label {
+          font-weight: 600;
+          width: 130px;
+        }
+        input {
+          border: 1px solid $white;
+          padding: 7px 15px;
+          border-left: 1px solid $neutral;
+          border-bottom: 1px solid $neutral;
+          flex-grow: 1;
+          &:focus {
+            outline: none;
+          }
+        }
+        > div {
+          padding-bottom: 5px;
+          display: flex;
+          justify-content: space-between;
+          @media (max-width: 575.98px) {
+            flex-direction: column;
+          }
+        }
+      }
+      .btn-modif-infos {
+        padding-bottom: 5px;
+        @media (max-width: 575.98px) {
+          flex-direction: column;
+        }
+        button {
+          display: block;
+        }
+      }
+      .form-admin,
+      .form-mdp {
+        &.form-mdp {
+          margin-top: 30px;
+          label {
+            width: 200px;
+          }
+        }
+        background-color: $neutral;
+        padding: 30px;
+        position: relative;
+        .fa-times {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          cursor: pointer;
+        }
+        .already-admin {
+          font-weight: 600;
+          color: $danger;
+        }
+        h3 {
+          padding-top: 0;
+          padding-bottom: 30px;
+        }
+        > div {
+          padding-bottom: 5px;
+          display: flex;
+          &.ipt-radio {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+            > div {
+              &:first-child {
+                padding-top: 15px;
+                padding-bottom: 10px;
+              }
+              label {
+                width: auto;
+                padding-left: 10px;
+              }
+              [type="radio"] {
+                &:checked,
+                &:not(:checked) {
+                  position: absolute;
+                  left: -9999px;
+                  & + label {
+                    position: relative;
+                    padding-left: 20px;
+                    cursor: pointer;
+                    &::before,
+                    &::after {
+                      content: "";
+                      position: absolute;
+                      left: 0;
+                      top: 2px;
+                      width: 13px;
+                      height: 13px;
+                      border: 1px solid darken($neutral, 30%);
+                      background: $white;
+                      border-radius: 100%;
+                    }
+                    &::after {
+                      background: $primary-color;
+                      border: 1px solid $primary-color;
+                      -webkit-transition: all 0.1s ease;
+                      transition: all 0.1s ease;
+                    }
+                  }
+                }
+                &:not(:checked) {
+                  & + label {
+                    &::after {
+                      opacity: 0;
+                      -webkit-transform: scale(0);
+                      transform: scale(0);
+                    }
+                  }
+                }
+                &:checked {
+                  & + label {
+                    &::after {
+                      opacity: 1;
+                      -webkit-transform: scale(1);
+                      transform: scale(1);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        label {
+          width: 130px;
+          margin-bottom: 0;
+          display: flex;
+          align-items: center;
+        }
+        input {
+          border: none;
+          padding: 7px 15px;
+          flex-grow: 1;
+          &:focus {
+            outline: none;
+          }
+        }
+        button {
+          margin-top: 10px;
+          display: block;
+        }
+      }
+      button {
+        display: none;
+        margin-top: 15px;
+        padding: 7px 15px;
+        background-color: $secondary-color;
+        color: $white;
+        border: none;
+        &.visible {
+          display: block;
+        }
+        &[disabled] {
+          background-color: darken($neutral, 20%);
+        }
+      }
+      ul {
+        padding: 0;
+        li {
+          border: 1px solid $neutral;
+          padding: 15px;
+          p {
+            display: flex;
+            align-items: center;
+          }
+          i {
+            margin-right: 15px;
+          }
+          &:nth-child(2n) {
+            background-color: $neutral;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+<app-navbarsite></app-navbarsite>
+<app-loader></app-loader>
+<app-modal-image *ngIf="modalIsOpen"></app-modal-image>
+<main [ngStyle]="{ 'min-height.px': h }">
+  <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>

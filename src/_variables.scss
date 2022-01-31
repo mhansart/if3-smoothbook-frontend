@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Ubuntu:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Raleway:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mukta+Vaani:wght@300;400;500;700&family=Oswald:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&family=Source+Serif+Pro:wght@300;400;700&display=swap");
+
+@function hexToRGB($hex) {
+  @return red($hex), green($hex), blue($hex);
+}
+
+$white: white;
+$primary-color: #04042a;
+$secondary-color: #f0c30f;
+$danger: #f00f43;
+$warning: #10938f;
+$neutral: #eae6e6;
+
+:root {
+  --primary-color-site: white;
+  --secondary-color-site: black;
+  --font-title-site: "Roboto", sans-serif;
+  --font-content-site: "Ubuntu", sans-serif;
+}

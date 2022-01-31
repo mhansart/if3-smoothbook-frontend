@@ -1,0 +1,27 @@
+<div class="connexion" [ngStyle]="{ 'height.px': h }">
+  <form (ngSubmit)="onSubmit()" [formGroup]="fg">
+    <h3>Connectez-vous:</h3>
+    <div class="input-container">
+      <input
+        formControlName="email"
+        (input)="resetError()"
+        type="email"
+        placeholder="E-mail"
+      />
+      <span></span>
+    </div>
+    <div class="input-container">
+      <input
+        (input)="resetError()"
+        formControlName="password"
+        type="password"
+        placeholder="Mot de passe"
+      />
+      <span></span>
+    </div>
+    <div>
+      <button type="submit" [disabled]="fg.invalid">Connexion</button>
+    </div>
+  </form>
+  <p class="error-msg">{{ errorMessage }}</p>
+</div>

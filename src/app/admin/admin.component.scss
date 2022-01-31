@@ -1,0 +1,40 @@
+@use '../../variables' as *;
+:host {
+  display: flex;
+}
+#main-admin {
+  width: 100%;
+  padding-left: 250px;
+  transition: padding-left 0.3s;
+}
+.menu-burger {
+  display: none;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 30px 15px;
+  .burger-line {
+    transform-origin: right;
+    height: 3px;
+    width: 31px;
+    margin: 4px 0;
+    background-color: $primary-color;
+    transition: all 0.3s;
+  }
+  &.cross-menu {
+    .line2 {
+      background-color: transparent;
+    }
+    .line1 {
+      transform: rotate(-45deg);
+    }
+    .line3 {
+      transform: rotate(45deg);
+    }
+  }
+  @media (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+}

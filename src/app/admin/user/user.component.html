@@ -1,0 +1,170 @@
+<div class="user-page">
+  <div class="border-title">
+    <div class="container"><h2>Mon compte</h2></div>
+  </div>
+  <div class="container">
+    <div>
+      <div class="d-flex justify-content-between">
+        <h3>Mes infos</h3>
+        <div class="btn-deconnexion">
+          <button class="btn-logout" (click)="deconnexion()">
+            <span>Déconnexion</span><i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+      <form
+        (ngSubmit)="onSubmitInfos()"
+        [ngClass]="{ updateInfos: updateInfo }"
+        class="form-infos"
+        [formGroup]="fgInfos"
+      >
+        <div>
+          <label>Prénom:</label>
+          <input
+            type="text"
+            formControlName="firstname"
+            [readonly]="!updateInfo"
+          />
+        </div>
+        <div>
+          <label>Nom:</label>
+          <input type="text" formControlName="name" [readonly]="!updateInfo" />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="text" formControlName="email" [readonly]="!updateInfo" />
+        </div>
+        <div class="d-flex justify-content-between" *ngIf="updateInfo">
+          <button>Valider</button>
+          <button class="modif-mdp" (click)="modifyMdp()">
+            Modifier le mot de passe
+          </button>
+        </div>
+      </form>
+      <div
+        *ngIf="!updateInfo"
+        class="d-flex justify-content-between btn-modif-infos"
+      >
+        <button (click)="toggleInfos()">Modifier mes infos</button
+        ><button class="modif-mdp" (click)="modifyMdp()">
+          Modifier le mot de passe
+        </button>
+      </div>
+      <form
+        (ngSubmit)="onSubmitMdp()"
+        *ngIf="modifMdp"
+        class="form-mdp"
+        [formGroup]="fgMdp"
+      >
+        <i (click)="modifyMdp()" class="fa fa-times" aria-hidden="true"></i>
+        <h3>Modifier le mot de passe</h3>
+        <div>
+          <label>Mot de passe actuel</label>
+          <input
+            type="password"
+            (input)="iptAdmin()"
+            formControlName="password"
+          />
+        </div>
+        <div>
+          <label>Nouveau mot de passe</label>
+          <input
+            type="password"
+            (input)="iptAdmin()"
+            formControlName="newpsw"
+          />
+        </div>
+        <p class="already-admin">{{ wrongPsw }}</p>
+        <button type="submit" [disabled]="fgMdp.invalid">Valider</button>
+      </form>
+    </div>
+    <div>
+      <h3>Les administrateurs</h3>
+      <ul>
+        <li
+          class="one-admin d-flex justify-content-between align-item-center"
+          *ngFor="let admin of admin"
+        >
+          <p>
+            <span
+              ><i class="far fa-user"></i
+              ><strong>{{ admin.firstname }} {{ admin.name }}</strong></span
+            >
+            <span class="tiret">&nbsp;-&nbsp;</span
+            ><span> {{ admin.email }}</span>
+            <span class="tiret">&nbsp;-&nbsp;</span>
+            <span
+              >administrateur
+              {{ admin.admin == "first" ? "principal" : "secondaire" }}</span
+            >
+          </p>
+          <button
+            *ngIf="user[0]?.admin == 'first'"
+            (click)="deleteAdmin(admin.id)"
+            class="delete-btn"
+          >
+            Supprimer
+          </button>
+        </li>
+      </ul>
+      <button
+        [ngClass]="{ visible: !addingAdmin && user[0]?.admin == 'first' }"
+        (click)="addAdmin()"
+      >
+        Ajouter un administrateur
+      </button>
+      <form
+        (ngSubmit)="onSubmitAdmin()"
+        *ngIf="addingAdmin"
+        class="form-admin"
+        [formGroup]="fgAdmin"
+      >
+        <i (click)="addAdmin()" class="fa fa-times" aria-hidden="true"></i>
+        <h3>Ajouter un administrateur</h3>
+        <div>
+          <label>Prénom:</label>
+          <input type="text" formControlName="firstname" (input)="iptAdmin()" />
+        </div>
+        <div>
+          <label>Nom:</label>
+          <input type="text" formControlName="name" (input)="iptAdmin()" />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="text" formControlName="email" (input)="iptAdmin()" />
+        </div>
+        <div>
+          <label>Mot de passe:</label>
+          <input
+            type="password"
+            formControlName="password"
+            (input)="iptAdmin()"
+          />
+        </div>
+        <div class="ipt-radio">
+          <div>
+            <input
+              type="radio"
+              id="type-admin-first"
+              value="first"
+              formControlName="admin"
+            />
+            <label for="type-admin-first">Administateur principal</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="type-admin-second"
+              value="second"
+              formControlName="admin"
+            />
+
+            <label for="type-admin-second">Administrateur secondaire</label>
+          </div>
+        </div>
+        <p class="already-admin">{{ alreadyAdmin }}</p>
+        <button type="submit">Ajouter</button>
+      </form>
+    </div>
+  </div>
+</div>

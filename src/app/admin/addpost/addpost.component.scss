@@ -1,0 +1,166 @@
+@use '../../../variables' as *;
+.add-post {
+  padding-bottom: 30px;
+  .border-title {
+    border-bottom: 2px solid $secondary-color;
+  }
+  h2 {
+    padding: 30px 0px;
+    margin-bottom: 0;
+
+    display: flex;
+    flex-grow: 1;
+  }
+  .container {
+    padding: 0 60px;
+    @media (max-width: 992px) {
+      max-width: 100%;
+      width: 100%;
+      padding: 0 15px;
+    }
+    form {
+      background-color: $neutral;
+      padding: 15px;
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      > div {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid $white;
+        padding: 15px 30px;
+        @media only screen and (max-width: 600px) {
+          padding: 15px 15px;
+        }
+        &:last-child {
+          border-bottom: none;
+          padding-bottom: 15px;
+        }
+        input {
+          padding: 7px 15px;
+          border: none;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .main-image,
+      .images {
+        background-color: $white;
+        padding-top: 15px;
+      }
+      .main-image {
+        .image-upload {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          min-height: 250px;
+          padding: 15px;
+          img {
+            width: auto;
+            height: 250px;
+          }
+        }
+      }
+      .images {
+        .image-upload {
+          padding: 15px;
+          columns: 5;
+          column-gap: 15px;
+          min-height: 250px;
+          @media only screen and (max-width: 992px) {
+            column-count: 4;
+          }
+          @media only screen and (max-width: 600px) {
+            column-count: 2;
+          }
+          > div {
+            padding-bottom: 15px;
+            break-inside: avoid-column;
+            position: relative;
+            .delete-btn {
+              position: absolute;
+              top: 15px;
+              right: 15px;
+              cursor: pointer;
+              background-color: $danger;
+              height: 30px;
+              width: 30px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              i {
+                font-size: 14px;
+                color: $white;
+              }
+            }
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+        }
+      }
+      .btn-validate {
+        display: inline;
+        button {
+          padding: 7px 15px;
+          border: none;
+          background-color: $secondary-color;
+          color: $white;
+          cursor: pointer;
+          &[disabled] {
+            background-color: darken($neutral, 20%);
+          }
+        }
+      }
+    }
+  }
+}
+[type="checkbox"] {
+  &:checked,
+  &:not(:checked) {
+    position: absolute;
+    left: -9999px;
+    & + label {
+      position: relative;
+      padding-left: 20px;
+      cursor: pointer;
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 13px;
+        height: 13px;
+        border: 1px solid darken($neutral, 30%);
+        background: $white;
+      }
+      &::after {
+        background: $primary-color;
+        border: 1px solid $primary-color;
+        -webkit-transition: all 0.1s ease;
+        transition: all 0.1s ease;
+      }
+    }
+  }
+  &:not(:checked) {
+    & + label {
+      &::after {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+    }
+  }
+  &:checked {
+    & + label {
+      &::after {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+  }
+}
