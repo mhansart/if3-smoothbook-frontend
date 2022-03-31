@@ -46,7 +46,7 @@
           (click)="changeMonth('left')"
           class="fas fa-angle-left"
         ></i
-        ><span>{{ monthStr }} {{ year }}</span
+        ><span>{{ monthStr }} {{ actualYear }}</span
         ><i
           *ngIf="!(month == actualMonth && year == actualYear)"
           (click)="changeMonth('right')"

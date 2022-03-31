@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
     }
     // aller chercher les analytics
     this._infosService.getViews().subscribe(data => {
+      console.log(data);
       this.views = data;
       this.allViews = this.views.reduce(function (acc, obj) { return acc + obj.views_month; }, 0);
       this.infosMonth(this.actualMonth, this.actualYear);
@@ -82,6 +83,7 @@ export class DashboardComponent implements OnInit {
     moment().locale('fr');
 
     // all days of the month
+    this.monthViews = 0;
     var startOfMonth = moment([year, month, 1]);
     this.monthStr = moment(startOfMonth).format('MMMM');
     var endOfMonth = moment(startOfMonth).endOf('month');
@@ -90,7 +92,7 @@ export class DashboardComponent implements OnInit {
       startOfMonth.add(1, 'days');
     }
     // views of the month (general)
-    const viewThisMonth = this.views.filter((x) => { return x.month == month });
+    const viewThisMonth = this.views.filter((x) => { return x.month == month && x.year == year });
     const viewByDate = viewThisMonth[0] ?  JSON.parse(viewThisMonth[0].views).views : [];
     this.mostVisited = Math.max.apply(Math, viewByDate.map(o => o?.views));
     const onlyDays = [];
@@ -109,6 +111,7 @@ export class DashboardComponent implements OnInit {
     viewByDate.forEach((x) => {
       const day = x.date.split('/')[0];
       this.dateMonth[Number(day) - 1] = { ...this.dateMonth[Number(day) - 1], views: x?.views };
+      
       this.monthViews = viewThisMonth[0]?.views_month;
     })
     // views pages
